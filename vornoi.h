@@ -12,6 +12,8 @@ struct LevelPoint {
   std::string type;
 
   LevelPoint(H3P loc, std::string type) : loc(loc), type(type) { }
+
+  void dump() const;
 };
 
 

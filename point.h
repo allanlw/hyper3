@@ -7,6 +7,8 @@ struct Hyper3Point {
   double x;
   double y;
   double z;
+
+  void dump() const;
 };
 
 typedef Hyper3Point H3P;
