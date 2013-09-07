@@ -1,0 +1,12 @@
+
+All locations are stored in the Klein projection, in world-space
+
+For now, all you can do is move around horizontally, on the z=0 plane.
+
+How fast do you move?  I need to use the hyperbolic metric.
+
+How do you render?  First move the user to the origin (change to world space), then render Euclideanly
+   - This transformation will involve a fairly funky shader, but most of it can be deferred
+     - Note that normals do NOT work in a Euclidean manner!
+     - Texture coordinates are non-linear
+

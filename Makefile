@@ -11,7 +11,7 @@ CPPFLAGS+=-g
 CC=gcc
 CXX=g++
 
-SOURCES = vornoi.cpp point.cpp
+SOURCES = voronoi.cpp point.cpp
 
 COBJS:= $(patsubst %.c,%.o, $(SOURCES))
 OBJS= $(patsubst %.cpp, %.o, $(COBJS))

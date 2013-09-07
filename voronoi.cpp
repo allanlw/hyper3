@@ -1,4 +1,4 @@
-#include "vornoi.h"
+#include "voronoi.h"
 
 #include <iostream>
 
