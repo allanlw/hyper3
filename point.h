@@ -2,7 +2,6 @@
 #define _POINT_H
 
 struct Hyper3Point {
-public:
   Hyper3Point(double x, double y, double z) : x(x), y(y), z(z) { }
 
   double x;
