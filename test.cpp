@@ -1,4 +1,4 @@
-#include "vornoi.h"
+#include "voronoi.h"
 
 int main(int argc, char **argv) {
   return 0;
