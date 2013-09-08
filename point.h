@@ -24,15 +24,4 @@ struct Hyper3Point {
 
 typedef Hyper3Point H3P;
 
-struct Hyper3Plane {
-  Hyper3Point a;
-  float b;
-
-  Hyper3Plane(Hyper3Point a, float b) : a(a), b(b) { }
-
-  static Hyper3Plane calcMidPlane(const Hyper3Point&, const Hyper3Point&);
-
-  bool onSameSide(const Hyper3Point&, const Hyper3Point&) const;
-};
-
 #endif

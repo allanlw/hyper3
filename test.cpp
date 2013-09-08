@@ -15,5 +15,9 @@ int main(int argc, char **argv) {
   LevelVoronoi vor(points);
 
   vor.dump();
+
+  auto x = vor.calcPolys();
+
+  cout << x.size() << endl;
   return 0;
 }

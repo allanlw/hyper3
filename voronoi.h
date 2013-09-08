@@ -7,6 +7,8 @@
 #include <deque>
 
 #include "point.h"
+#include "tri.h"
+#include "plane.h"
 
 struct LevelPoint : public Hyper3Point {
   std::string type;
@@ -25,13 +27,15 @@ struct PointPlane {
   float dist;
 };
 
-struct PointsSet {
-  PointsSet(LevelPoint p) : p(p) { }
+struct VoronoiRegion {
+  VoronoiRegion(LevelPoint p) : p(p) { }
 
   LevelPoint p;
   std::deque<PointPlane> planes;
 
   void cull();
+
+  HyperPoly calcPoly() const;
 };
 
 class LevelVoronoi {
@@ -40,9 +44,12 @@ public:
 
   void dump() const;
 
-  std::deque<PointsSet>& getPoints() { return points; }
+  std::deque<VoronoiRegion>& getPoints() { return points; }
+
+  std::deque<HyperPoly> calcPolys() const;
+
 private:
-  std::deque<PointsSet> points;
+  std::deque<VoronoiRegion> points;
 };
 
 #endif

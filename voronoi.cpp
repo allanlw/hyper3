@@ -32,7 +32,7 @@ void LevelPoint::dump() const {
   cout << "\n";
 }
 
-void PointsSet::cull() {
+void VoronoiRegion::cull() {
   sort(planes.begin(), planes.end(), [](const PointPlane &x,
        const PointPlane &y) { return x.dist < y.dist; });
 
@@ -50,9 +50,17 @@ void PointsSet::cull() {
   }
 }
 
+HyperPoly VoronoiRegion::calcPoly() const {
+  HyperPoly poly = HyperPoly::getUniverse();
+  for (auto it = planes.begin(), e = planes.end(); it != e; ++it) {
+    poly = poly.clip(it->plane, it->p);
+  }
+  return poly;
+}
+
 LevelVoronoi::LevelVoronoi(const vector<LevelPoint>& points) {
   for (auto i = points.begin(), e = points.end(); i != e; ++i) {
-    PointsSet s(*i);
+    VoronoiRegion s(*i);
     for (auto j = points.begin(); j != e; ++j) {
       if (j == i) continue;
       PointPlane pp = {*j, Hyper3Plane::calcMidPlane(s.p, *j), i->distance(*j)};
@@ -71,4 +79,12 @@ void LevelVoronoi::dump() const {
     pp += i->planes.size();
   }
   cout << pp << " planes (" << (pp / points.size()) << "/point)" << endl;
+}
+
+deque<HyperPoly> LevelVoronoi::calcPolys() const {
+  deque<HyperPoly> res;
+  for (auto &point : points) {
+    res.push_back(point.calcPoly());
+  }
+  return res;
 }
