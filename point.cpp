@@ -54,5 +54,5 @@ bool Hyper3Plane::onSameSide(const Hyper3Point& x,
   float xs = a.dotProduct(x) + b;
   float ys = a.dotProduct(y) + b;
 
-  return (xs < 0) ? (ys < 0) : (ys >= 0);
+  return signbit(xs) == signbit(ys);
 }

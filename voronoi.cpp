@@ -36,20 +36,18 @@ void PointsSet::cull() {
   sort(planes.begin(), planes.end(), [](const PointPlane &x,
        const PointPlane &y) { return x.dist < y.dist; });
 
-  std::deque<PointPlane> newPlanes;
+  auto &myP = p;
 
-  while (planes.size() > 0) {
-    auto x = planes.front();
-    planes.pop_front();
+  // Note: C++ standard guarantees the iterator will remain valid over
+  // calls to planes.erase if the erased elements are at the end of the
+  // container.
+  for (auto it = planes.begin(); it != planes.end(); ++it) {
+    auto &x = *it;
 
-    newPlanes.push_back(x);
-
-    planes.erase(remove_if(planes.begin(), planes.end(), [&x](PointPlane &y) {
-      return !x.plane.onSameSide(x.p, y.p);
+    planes.erase(remove_if(it + 1, planes.end(), [&myP, &x](PointPlane &y) {
+      return !x.plane.onSameSide(myP, y.p);
     }), planes.end());
   }
-
-  planes = newPlanes;
 }
 
 LevelVoronoi::LevelVoronoi(const vector<LevelPoint>& points) {

@@ -40,6 +40,7 @@ public:
 
   void dump() const;
 
+  std::deque<PointsSet>& getPoints() { return points; }
 private:
   std::deque<PointsSet> points;
 };
