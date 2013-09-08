@@ -11,5 +11,9 @@ int main(int argc, char **argv) {
     p.dump();
   }
   cout << endl;
+
+  LevelVoronoi vor(points);
+
+  vor.dump();
   return 0;
 }

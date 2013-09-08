@@ -2,13 +2,13 @@
 #define _POINT_H
 
 struct Hyper3Point {
-  Hyper3Point(float x, float y, float z) : x(x), y(y), z(z) { }
-
   float x;
   float y;
   float z;
 
-  void dump() const;
+  Hyper3Point(float x, float y, float z) : x(x), y(y), z(z) { }
+
+  virtual void dump() const;
 
   float distance(const Hyper3Point&) const;
 
@@ -30,7 +30,9 @@ struct Hyper3Plane {
 
   Hyper3Plane(Hyper3Point a, float b) : a(a), b(b) { }
 
-  static Hyper3Plane calcMidPlane(Hyper3Point, Hyper3Point);
+  static Hyper3Plane calcMidPlane(const Hyper3Point&, const Hyper3Point&);
+
+  bool onSameSide(const Hyper3Point&, const Hyper3Point&) const;
 };
 
 #endif

@@ -32,7 +32,8 @@ float Hyper3Point::norm() const {
   return sqrtf(x * x + y * y + z * z);
 }
 
-Hyper3Plane Hyper3Plane::calcMidPlane(Hyper3Point p, Hyper3Point q) {
+Hyper3Plane Hyper3Plane::calcMidPlane(const Hyper3Point& p,
+        const Hyper3Point& q) {
   auto _psq = sqrtf(p.oneMinusSquareNorm());
   auto _qsq = sqrtf(q.oneMinusSquareNorm());
   auto a = q * _psq - p * _qsq;
@@ -46,4 +47,12 @@ Hyper3Point Hyper3Point::operator*(float c) const {
 
 Hyper3Point Hyper3Point::operator-(const Hyper3Point& other) const {
   return Hyper3Point(x - other.x, y - other.y, z - other.z);
+}
+
+bool Hyper3Plane::onSameSide(const Hyper3Point& x,
+        const Hyper3Point& y) const {
+  float xs = a.dotProduct(x) + b;
+  float ys = a.dotProduct(y) + b;
+
+  return (xs < 0) ? (ys < 0) : (ys >= 0);
 }

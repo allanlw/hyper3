@@ -4,18 +4,44 @@
 #include <string>
 #include <istream>
 #include <vector>
+#include <deque>
 
 #include "point.h"
 
-struct LevelPoint {
-  Hyper3Point loc;
+struct LevelPoint : public Hyper3Point {
   std::string type;
 
-  LevelPoint(H3P loc, std::string type) : loc(loc), type(type) { }
+  LevelPoint(float x, float y, float z, std::string type) :
+      Hyper3Point(x, y, z), type(type) { }
 
   void dump() const;
 };
 
 std::vector<LevelPoint> parseLevelPoints(std::istream &in);
+
+struct PointPlane {
+  LevelPoint p;
+  Hyper3Plane plane;
+  float dist;
+};
+
+struct PointsSet {
+  PointsSet(LevelPoint p) : p(p) { }
+
+  LevelPoint p;
+  std::deque<PointPlane> planes;
+
+  void cull();
+};
+
+class LevelVoronoi {
+public:
+  LevelVoronoi(const std::vector<LevelPoint>& points);
+
+  void dump() const;
+
+private:
+  std::deque<PointsSet> points;
+};
 
 #endif
