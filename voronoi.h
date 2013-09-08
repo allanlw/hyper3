@@ -16,7 +16,6 @@ struct LevelPoint {
   void dump() const;
 };
 
-
 std::vector<LevelPoint> parseLevelPoints(std::istream &in);
 
 #endif
