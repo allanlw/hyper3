@@ -41,6 +41,10 @@ float Hyper3Point::operator*(const Hyper3Point& other) const {
   return this->dotProduct(other);
 }
 
+Hyper3Point Hyper3Point::operator+(const Hyper3Point& other) const {
+  return Hyper3Point(x + other.x, y + other.y, z + other.z);
+}
+
 Hyper3Point Hyper3Point::operator-(const Hyper3Point& other) const {
   return Hyper3Point(x - other.x, y - other.y, z - other.z);
 }
