@@ -22,20 +22,7 @@ bool Hyper3Plane::onSameSide(const H3P& x, const H3P& y) const {
 }
 #if 0
 H3P Hyper3Plane::intersectSegment(const H3P& x, const H3P& y) const {
-  assert(!onSameSide(x, y));
-
-
-  /*
-  <a c> + b == 0
-
-  a[0] * c[0] + a[1] * c[1] + a[2] * c[2] + b == 0
-
-  points are on the line if they satisfy the equation:
-    tx + (1-t)y = p for t in 0..1
-
-  c = tx + (1-t)y
-  <a c> + b == 0
-  */
-
+  auto t = (a*y + b)/(a*(y - x));
+  return x*t + y*(1-t);
 }
 #endif
