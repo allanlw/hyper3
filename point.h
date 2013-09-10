@@ -19,6 +19,7 @@ struct Hyper3Point {
   float oneMinusSquareNorm() const;
 
   Hyper3Point operator*(float) const;
+  float operator*(const Hyper3Point&) const;
   Hyper3Point operator-(const Hyper3Point&) const;
 };
 
