@@ -7,6 +7,8 @@ struct Hyper3Plane {
   Hyper3Point a;
   float b;
 
+  /* This plane represents the solution to ax + b = 0 */
+
   Hyper3Plane(Hyper3Point a, float b) : a(a), b(b) { }
 
   static Hyper3Plane calcMidPlane(const Hyper3Point&, const Hyper3Point&);
