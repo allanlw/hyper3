@@ -20,9 +20,8 @@ bool Hyper3Plane::onSameSide(const H3P& x, const H3P& y) const {
 
   return xs == 0.0 || ys == 0.0 || signbit(xs) == signbit(ys);
 }
-#if 0
+
 H3P Hyper3Plane::intersectSegment(const H3P& x, const H3P& y) const {
   auto t = (a*y + b)/(a*(y - x));
   return x*t + y*(1-t);
 }
-#endif
